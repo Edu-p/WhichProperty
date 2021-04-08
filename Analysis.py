@@ -1,8 +1,5 @@
 import pandas as pd
 
-#------------
-#Extract
-#------------
 
 portifolio = pd.read_csv( 'dataset/kc_house_data.csv' )
 
@@ -12,26 +9,32 @@ portifolio = pd.read_csv( 'dataset/kc_house_data.csv' )
 
 portWithFilter = portifolio[['id','price','zipcode','date','condition','yr_built','yr_renovated','bedrooms']]
 
-print(portWithFilter.shape)
+# print(portWithFilter.shape)
 
 # removing outliers
 
 portWithFilter = portWithFilter.loc[(portWithFilter['price']<2000000) & (portWithFilter['bedrooms']<5)]
 
-print(portWithFilter.shape)
+# print(portWithFilter.shape)
 
 # casting
 
 portWithFilter['date'] = pd.to_datetime(portWithFilter['date'])
 
 # sorting by date
+
 portWithFilter = portWithFilter.sort_values('date')
 
-print(portWithFilter['date'].head)
+# print(portWithFilter['date'].head)
 
-#-------------
-#Trasform
-#-------------
+# grouping by zipcode
+
+portWithFilter[['price','zipcode']].groupby('zipcode').median()
+
+
+
+
+
 
 
 
