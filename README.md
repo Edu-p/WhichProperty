@@ -1,5 +1,5 @@
 # WhichProperty
-
+# PASSAR TUDO PRA INGLES
 1. Questao de negocio:
     - O que você quer resolver?
     - Procurar um modelo que aponte quais casas deveriamos comprar e por qual preço?
