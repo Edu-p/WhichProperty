@@ -6,8 +6,8 @@
     - Uma vez comprado, qual o melhor momento ( do ano )para vende-lo e por qual preço?
 2. Premissas do negocio:
     - Metricas que foram alteradas para Acontecer o projeto( casas ficam cheias de neve no inverno )
-    - Considerei que é inverno no intervalo de 21 de setembro ate 20 de março 
-    - Consideri que é verao no intervalo de 20 de março ate 22 de setembro
+    - Considerei que é inverno no intervalo de setembro ate março 
+    - Consideri que é verao no intervalo de março ate setembro
     - 
     - O que considerei como Outliers no meu projeto( valores acima de ... sao considerados erros humanos )
     - Considerei outlires casas acima de 2000000 de dolares
