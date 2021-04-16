@@ -72,5 +72,4 @@ for i in range ( len(portWithFilter) ):
 
 print(portWithFilter[['status','price','zipcode','season','sell_price','profit']].head(50))
 
-print( portWithFilter['profit'][portWithFilter['profit'] > 0].sum() )
-
+print( 'Total Profit: {}'.format( portWithFilter['profit'][portWithFilter['profit'] > 0].sum() ) )
