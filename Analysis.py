@@ -31,15 +31,16 @@ portWithFilter['status'] = 'NA'
 
 # print(portWithFilter.columns)
 
-# for i in range( len(portWithFilter) ):
-#     for j in range( len(medianbyZipCode) ):
-#         if ( portWithFilter.iloc[i, 2] == medianbyZipCode.loc[j, 'zipcode'] ):
-#             portWithFilter.iloc[i, 8] = medianbyZipCode.loc[j,'price']
-#             if( portWithFilter.iloc[i, 1] > medianbyZipCode.loc[j, 'price'] ):
-#                 portWithFilter.iloc[i, 9] = 'not buy'
-#             else:
-#                 portWithFilter.iloc[i, 9]  = 'buy'
-#             continue
+
+for i in range( len(portWithFilter) ):
+    for j in range( len(medianbyZipCode) ):
+        if ( portWithFilter.iloc[i, 2] == medianbyZipCode.loc[j, 'zipcode'] ):
+            portWithFilter.iloc[i, 8] = medianbyZipCode.loc[j,'price']
+            if( portWithFilter.iloc[i, 1] > medianbyZipCode.loc[j, 'price'] ):
+                portWithFilter.iloc[i, 9] = 'not buy'
+            else:
+                portWithFilter.iloc[i, 9]  = 'buy'
+            continue
 
 
 # print(portWithFilter.head(15))
@@ -54,12 +55,7 @@ portWithFilter['profit'] = 0
 portWithFilter.loc[ (portWithFilter['date'].dt.month >= 3) & (portWithFilter['date'].dt.month < 9), 'season'] = 'Summer'
 portWithFilter.loc[ (portWithFilter['date'].dt.month >= 9) | (portWithFilter['date'].dt.month < 3), 'season'] = 'Winter'
 
-
-
-print(portWithFilter[['date','season']][ (portWithFilter['season'] == 'Winter')].head(50))
-
-
-
+medianbyZipCodeandSeason = portWithFilter[['price','zipcode','season']].groupby( ['zipcode','season'] ).median().reset_index()
 
 
 
