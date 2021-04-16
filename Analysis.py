@@ -57,5 +57,20 @@ portWithFilter.loc[ (portWithFilter['date'].dt.month >= 9) | (portWithFilter['da
 
 medianbyZipCodeandSeason = portWithFilter[['price','zipcode','season']].groupby( ['zipcode','season'] ).median().reset_index()
 
+for i in range ( len(portWithFilter) ):
+    if portWithFilter.iloc[i, 9] == 'buy':
+        for j in range( len(medianbyZipCodeandSeason) ):
+            if(portWithFilter.iloc[i, 2] == medianbyZipCodeandSeason.loc[j, 'zipcode']) & ( medianbyZipCodeandSeason.loc[j, 'season'] == 'Summer' ):
+                if( portWithFilter.iloc[i,1] >= medianbyZipCodeandSeason.loc[j,'price'] ):
+                    portWithFilter.iloc[i, 11]  = portWithFilter.iloc[i,1]*1.1
+                    break
+                else:
+                    portWithFilter.iloc[i, 11] = portWithFilter.iloc[i, 1] * 1.3
+                    break
 
+    portWithFilter.iloc[i,12] = portWithFilter.iloc[i,11] - portWithFilter.iloc[i,1]
+
+print(portWithFilter[['status','price','zipcode','season','sell_price','profit']].head(50))
+
+print( portWithFilter['profit'][portWithFilter['profit'] > 0].sum() )
 
