@@ -4,12 +4,17 @@
 
 import pandas as pd
 import numpy as np
+import seaborn as sns
+# from matplotlib import pyplot as plt
 
 # 2.0 Helper functions
+
+
 
 # 3.0 Loading data(*)
 
 portifolio = pd.read_csv( 'dataset/kc_house_data.csv' )
+
 ### 3.0.1 filtering data
 portifolio = portifolio[['id', 'price', 'zipcode', 'date', 'condition', 'yr_built', 'yr_renovated', 'bedrooms']]
 
@@ -41,13 +46,18 @@ portifolio['date'] = pd.to_datetime(portifolio['date'])
 
 ## 4.0.7 Descriptive Statistical
 
+pd.set_option('display.float_format', lambda x: '%.2f' % x)
+
 ### 4.0.7.1 Numerical Attributes
 
-# Central Tendency -  mean, median
+num_attributes = portifolio.select_dtypes( include=['int64', 'float64'] )
+cat_attributes = portifolio.select_dtypes( exclude=['int64', 'float64', 'datetime64[ns]'] )
+
+#### 4.0.7.1.1 Central Tendency -  mean, median
 ct1 = pd.DataFrame( num_attributes.apply( np.mean ) ).T
 ct2 = pd.DataFrame( num_attributes.apply( np.median ) ).T
 
-# Dispersion - std, min, max, range, skev, kurtosis
+#### 4.0.7.1.2 Dispersion - std, min, max, range, skev, kurtosis
 d1 = pd.DataFrame( num_attributes.apply( np.std ) ).T # Esse T é para uma vermos melhor o dataset
 d2 = pd.DataFrame( num_attributes.apply( min ) ).T # Esse T é para uma vermos melhor o dataset
 d3 = pd.DataFrame( num_attributes.apply( max ) ).T # Esse T é para uma vermos melhor o dataset
@@ -55,19 +65,15 @@ d4 = pd.DataFrame( num_attributes.apply( lambda x: x.max() - x.min() ) ).T # Ess
 d5 = pd.DataFrame( num_attributes.apply( lambda x: x.skew() ) ).T # Esse T é para uma vermos melhor o dataset
 d6 = pd.DataFrame( num_attributes.apply( lambda x: x.kurtosis ) ).T # Esse T é para uma vermos melhor o dataset
 
-# concatenate
 dfDesc = pd.concat( [ d2, d3, d4, ct1, ct2, d1, d5, d4 ] ).T.reset_index()
 
 dfDesc.columns = ['attributes', 'min', 'max', 'range', 'mean', 'median', 'std', 'skew', 'kurtosis']
 
+print(dfDesc)
 
 ### 4.0.7.2 Categorical Attributes
 
-
-
-
-
-
+sns.boxplot( x='date' , y='price' , data=portifolio )
 
 ## 4.0.8 Feature engeneering
 
@@ -79,6 +85,9 @@ portifolio['profit'] = 0
 
 # 5.0 Data Exp
 
+###########
+# ver notas na area de trabalho
+###########
 
 
 # 6.0 Putting on Heroku
