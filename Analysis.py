@@ -1,58 +1,59 @@
 
 
-# Imports
+# 1.0 Imports
 
 import pandas as pd
 
-# Helper functions
+# 2.0 Helper functions
 
-# Loading data
+# 3.0 Loading data(*)
 
 portifolio = pd.read_csv( 'dataset/kc_house_data.csv' )
+### 3.0.1 filtering data
 portifolio = portifolio[['id', 'price', 'zipcode', 'date', 'condition', 'yr_built', 'yr_renovated', 'bedrooms']]
 
 
-# Data Description
+# 4.0 Data Description
 
+## 4.0.1 Data Dimensions
 
+print( 'number of Rows: {}'.format( portifolio.shape[0] ) )
+print( 'number of Rows: {}'.format( portifolio.shape[1] ) )
 
+## 4.0.2 Data Types
 
-## Data Dimensions
+portifolio['date'] = pd.to_datetime(portifolio['date'])
+portifolio.dtypes
 
-## Data Types
+## 4.0.3 Check NA
 
-## Check NA
+portifolio.isna().sum()
 
-## Fillout NA
+## 4.0.4 Fillout NA
 
-## Change types
-
-## Descriptive Statistical
-
-
-
-
-
-# Data Exp
-
-
-
-# Putting on Heroku
-
-
-
-
-# removing outliers
+## 4.0.5 Removing Outliers
 
 portifolio = portifolio.loc[(portifolio['price'] < 2000000) & (portifolio['bedrooms'] < 5)]
 
-# casting
+
+## 4.0.6 Change types
 
 portifolio['date'] = pd.to_datetime(portifolio['date'])
 
-# sorting by date
+## 4.0.7 Descriptive Statistical
 
-portifolio = portifolio.sort_values('date')
+
+
+
+
+# 5.0 Data Exp
+
+
+
+# 6.0 Putting on Heroku
+
+
+
 
 # grouping by zipcode
 
