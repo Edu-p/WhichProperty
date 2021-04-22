@@ -58,22 +58,18 @@ ct1 = pd.DataFrame( num_attributes.apply( np.mean ) ).T
 ct2 = pd.DataFrame( num_attributes.apply( np.median ) ).T
 
 #### 4.0.7.1.2 Dispersion - std, min, max, range, skev, kurtosis
-d1 = pd.DataFrame( num_attributes.apply( np.std ) ).T # Esse T é para uma vermos melhor o dataset
-d2 = pd.DataFrame( num_attributes.apply( min ) ).T # Esse T é para uma vermos melhor o dataset
-d3 = pd.DataFrame( num_attributes.apply( max ) ).T # Esse T é para uma vermos melhor o dataset
-d4 = pd.DataFrame( num_attributes.apply( lambda x: x.max() - x.min() ) ).T # Esse T é para uma vermos melhor o dataset
-d5 = pd.DataFrame( num_attributes.apply( lambda x: x.skew() ) ).T # Esse T é para uma vermos melhor o dataset
-d6 = pd.DataFrame( num_attributes.apply( lambda x: x.kurtosis ) ).T # Esse T é para uma vermos melhor o dataset
+d1 = pd.DataFrame( num_attributes.apply( np.std ) ).T
+d2 = pd.DataFrame( num_attributes.apply( min ) ).T
+d3 = pd.DataFrame( num_attributes.apply( max ) ).T
+d4 = pd.DataFrame( num_attributes.apply( lambda x: x.max() - x.min() ) ).T
+d5 = pd.DataFrame( num_attributes.apply( lambda x: x.skew() ) ).T
+d6 = pd.DataFrame( num_attributes.apply( lambda x: x.kurtosis ) ).T
 
 dfDesc = pd.concat( [ d2, d3, d4, ct1, ct2, d1, d5, d4 ] ).T.reset_index()
 
 dfDesc.columns = ['attributes', 'min', 'max', 'range', 'mean', 'median', 'std', 'skew', 'kurtosis']
 
 print(dfDesc)
-
-### 4.0.7.2 Categorical Attributes
-
-sns.boxplot( x='date' , y='price' , data=portifolio )
 
 ## 4.0.8 Feature engeneering
 
