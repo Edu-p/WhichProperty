@@ -97,18 +97,25 @@ medianbyZipCode = portifolio[['price', 'zipcode']].groupby('zipcode').median().r
 # comparing properties by median of zipcode
 
 # print(portWithFilter.columns)
-
+print('ate aq')
+print(portifolio.columns)
 
 for i in range(len(portifolio)):
     for j in range( len(medianbyZipCode) ):
         if ( portifolio.iloc[i, 2] == medianbyZipCode.loc[j, 'zipcode']):
-            portifolio.iloc[i, 8] = medianbyZipCode.loc[j, 'price']
+            print(i,j)
+            portifolio.iloc[i, 11] = medianbyZipCode.loc[j, 'price']
+
             continue
 
 
+
+
 portifolio['season'] = 'StdSeason'
+portifolio.loc[(portifolio['date'].dt.month >= 3) & (portifolio['date'].dt.month < 9), 'season'] = 'Summer'
+portifolio.loc[(portifolio['date'].dt.month >= 9) | (portifolio['date'].dt.month < 3), 'season'] = 'Winter'
 
-
+print(portifolio[['zipcode_median_price', 'season']])
 
 
 
