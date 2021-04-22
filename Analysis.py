@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 # from matplotlib import pyplot as plt
+from IPython.display import Image
 
 # 2.0 Helper functions
 
@@ -25,7 +26,7 @@ portifolio = portifolio[['id', 'price', 'zipcode', 'date', 'condition', 'yr_buil
 
 print( 'number of Rows: {}'.format( portifolio.shape[0] ) )
 print( 'number of Rows: {}'.format( portifolio.shape[1] ) )
-
+print('----------------------------\n')
 ## 4.0.2 Data Types
 
 portifolio['date'] = pd.to_datetime(portifolio['date'])
@@ -34,6 +35,7 @@ print( portifolio.dtypes )
 ## 4.0.3 Check NA
 
 print(portifolio.isna().sum())
+print('----------------------------\n')
 
 ## 4.0.5 Removing Outliers
 
@@ -70,14 +72,45 @@ dfDesc = pd.concat( [ d2, d3, d4, ct1, ct2, d1, d5, d4 ] ).T.reset_index()
 dfDesc.columns = ['attributes', 'min', 'max', 'range', 'mean', 'median', 'std', 'skew', 'kurtosis']
 
 print(dfDesc)
+print('----------------------------\n')
 
 ## 4.0.8 Feature engeneering
 
-portifolio['median_price'] = 0
-portifolio['status'] = 'NA'
-portifolio['season'] = 'StdSeason'
-portifolio['sell_price'] = 0
+### 4.0.8.1 hypothesis to validate
+    # 1. does the season that you sell influence profit?
+    # 2. the valuation of the zipcode influences the price of the property?
+    # 3. if the condition of the property is bad, is it devalued?
+    # 4. are older properties cheaper?
+    # 5. are non-renovated properties cheaper?
+
+### 4.0.8.2 crating columns
 portifolio['profit'] = 0
+portifolio['status'] = 'NA'
+portifolio['sell_price'] = 0
+
+portifolio['zipcode_median_price'] = 0
+
+# grouping by zipcode
+
+medianbyZipCode = portifolio[['price', 'zipcode']].groupby('zipcode').median().reset_index()
+
+# comparing properties by median of zipcode
+
+# print(portWithFilter.columns)
+
+
+for i in range(len(portifolio)):
+    for j in range( len(medianbyZipCode) ):
+        if ( portifolio.iloc[i, 2] == medianbyZipCode.loc[j, 'zipcode']):
+            portifolio.iloc[i, 8] = medianbyZipCode.loc[j, 'price']
+            continue
+
+
+portifolio['season'] = 'StdSeason'
+
+
+
+
 
 # 5.0 Data Exp
 
