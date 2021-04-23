@@ -110,52 +110,35 @@ def creating_features( data ):
 
     return data
 
-
 # 3.0 Loading data(*)
-
 portifolio = loading_data( 'dataset/kc_house_data.csv' )
 
 ### 3.0.1 filtering data
-
 portifolio = filtering_data( portifolio )
 
 
 # 4.0 Data Description
 
 ## 4.0.1 Data Dimensions
-
 show_data_dimensions(portifolio)
 
 ## 4.0.2 Data Types
-
 portifolio = show_data_types( portifolio )
 
 ## 4.0.3 Check NA
-
 checkNa(portifolio)
 
 ## 4.0.5 Removing Outliers
-
 portifolio = removing_outliers( portifolio )
 
 
 ## 4.0.6 Change types
-
 portifolio = change_types( portifolio )
 
 ## 4.0.7 Descriptive Statistical
-
 descriptive_statistical(portifolio)
 
 ## 4.0.8 Feature engeneering
-
-### 4.0.8.1 hypothesis to validate
-# 1. does the season that you sell influence profit?
-# 2. the valuation of the zipcode influences the price of the property?
-# 3. if the condition of the property is bad, is it devalued?
-# 4. are older properties cheaper?
-# 5. are non-renovated properties cheaper?
-
 portifolio = creating_features( portifolio )
 
 # 5.0 Data Exp

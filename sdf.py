@@ -5,6 +5,8 @@ import numpy as np
 import seaborn as sns
 # from matplotlib import pyplot as plt
 from IPython.display import Image
+import Streamlit as st
+import plotly.express as px
 
 # 2.0 Helper functions
 
@@ -136,9 +138,46 @@ portifolio = creating_features( portifolio )
 
 # 5.0 Data Exp
 
-###########
-# ver notas na area de trabalho
-###########
+# validating hypothesis
+
+
+# 1 hypothesis
+
+# Avarage Price per year
+
+st.sidebar.title( 'Commercial Options' )
+st.title( 'Commercial atributes' )
+
+data['date'] = pd.to_datetime( data['date'] ).dt.strftime('%Y-%m-%d')
+
+# Filters
+min_year_built = int( data['yr_built'].min() )
+max_year_built = int(data['yr_built'].max() )
+
+st.sidebar.subheader( 'Select Max Year Built' )
+f_year_built = st.sidebar.slider( 'Year Built', min_year_built,
+                                 max_year_built,
+                                 min_year_built)
+
+
+
+st.header( 'Avarage Price per Year Built' )
+
+df1 = data.loc[ data['yr_built'] < f_year_built ]
+
+df1 =  df1[['yr_built','price']].groupby('yr_built').mean().reset_index()
+
+fig = px.line( df1,x='yr_built',y='price' )
+
+st.plotly_chart( fig,use_container_width=True )
+
+
+
+
+
+
+
+
 
 
 # 6.0 Putting on Heroku
