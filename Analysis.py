@@ -6,6 +6,8 @@ import numpy as np
 import seaborn as sns
 # from matplotlib import pyplot as plt
 from IPython.display import Image
+import streamlit as st
+import plotly.express as px
 
 # 2.0 Helper functions
 
@@ -110,6 +112,18 @@ def creating_features( data ):
 
     return data
 
+def validating_first_hypo( data ):
+    # Avarage Price per year
+    st.title('Commercial atributes')
+
+    st.header('Avarage Price per Year Built')
+
+    data = data[['season', 'price']].groupby('season').mean().reset_index()
+
+    fig = px.bar(portifolio, x='season', y='price')
+
+    st.plotly_chart(fig, use_container_width=True)
+
 # 3.0 Loading data(*)
 portifolio = loading_data( 'dataset/kc_house_data.csv' )
 
@@ -143,9 +157,21 @@ portifolio = creating_features( portifolio )
 
 # 5.0 Data Exp
 
-###########
-# ver notas na area de trabalho
-###########
+## 5.0.1 validating first hypothesis
+
+validating_first_hypo( portifolio )
+
+## 5.0.1 validating first hypothesis
+
+validating_first_hypo( portifolio )
+
+## 5.0.1 validating first hypothesis
+
+validating_first_hypo( portifolio )
+
+## 5.0.1 validating first hypothesis
+
+validating_first_hypo( portifolio )
 
 
 # 6.0 Putting on Heroku
