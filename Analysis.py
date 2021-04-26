@@ -98,12 +98,12 @@ def creating_features( data ):
     medianbyZipCode = data[['price', 'zipcode']].groupby('zipcode').median().reset_index()
     # comparing properties by median of zipcode
     print(data.columns)
-    for i in range(len(data)):  # this need to update to do more fast this att
-        for j in range(len(medianbyZipCode)):
-            if (data.iloc[i, 2] == medianbyZipCode.loc[j, 'zipcode']):
-                print(i, j)
-                data.iloc[i, 11] = medianbyZipCode.loc[j, 'price']
-                continue
+    # for i in range(len(data)):  # this need to update to do more fast this att
+    #     for j in range(len(medianbyZipCode)):
+    #         if (data.iloc[i, 2] == medianbyZipCode.loc[j, 'zipcode']):
+    #             print(i, j)
+    #             data.iloc[i, 11] = medianbyZipCode.loc[j, 'price']
+    #             continue
 
     data['season'] = 'StdSeason'
     data.loc[(data['date'].dt.month >= 3) & (data['date'].dt.month < 9), 'season'] = 'Summer'
@@ -138,9 +138,31 @@ def validating_second_hypo( data ):
 
     data['zipcode'] = data['zipcode'].astype(object)
 
-    st.write(portifolio)
+    st.write(data)
 
     fig = px.bar(data, x='zipcode', y='median_price')
+
+    st.plotly_chart(fig, use_container_width=True)
+
+    return None
+
+def validating_third_hypo( data ):
+    st.header('If the condition of the property is bad, is it more than 30% devalued, on average?')
+    st.subheader('(if you compare with properties that were in good condition)')
+    st.write('\n')
+
+    median_good = int(data[ (data['condition'] == 4) | (data['condition'] == 3) | (data['condition'] == 5) ]['price'].median() )
+    median_bad = int(data[ (data['condition'] == 1) | (data['condition'] == 2) ]['price'].median() )
+
+    data1 = { 'median_good' : [median_good], 'median_bad' : [median_bad] }
+
+    df = pd.DataFrame( data1, index=['median'] )
+
+    st.write( df )
+
+    df = px.data.tips()
+
+    fig = px.pie(df, values='tip', names='median_good')
 
     st.plotly_chart(fig, use_container_width=True)
 
@@ -179,23 +201,18 @@ portifolio = creating_features( portifolio )
 
 # 5.0 Data Exp
 
-## 5.0.1 validating first hypothesis
-
-validating_first_hypo( portifolio )
 
 ## 5.0.1 validating first hypothesis
-
 validating_first_hypo( portifolio )
 
-## 5.0.1 validating first hypothesis
-
-validating_first_hypo( portifolio )
-
-## 5.0.1 validating first hypothesis
-
-validating_first_hypo( portifolio )
-
+## 5.0.2 validating second hypothesis
 validating_second_hypo( portifolio )
+
+## 5.0.3 validating third hypothesis
+validating_third_hypo( portifolio )
+
+
+
 
 
 
