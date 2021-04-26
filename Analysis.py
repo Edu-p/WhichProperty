@@ -113,16 +113,38 @@ def creating_features( data ):
     return data
 
 def validating_first_hypo( data ):
-    # Avarage Price per year
-    st.title('Commercial atributes')
+    st.title('Validating hypothesis')
 
-    st.header('Avarage Price per Year Built')
+    st.header('Does the season that you sell influence price?')
 
     data = data[['season', 'price']].groupby('season').mean().reset_index()
 
     fig = px.bar(portifolio, x='season', y='price')
 
     st.plotly_chart(fig, use_container_width=True)
+
+    return None
+
+def validating_second_hypo( data ):
+    st.header('The valuation of the zipcode influences the price of the property?')
+
+    st.write('\n')
+
+    data = data[['zipcode', 'price']].groupby('zipcode').median().reset_index()
+
+    cols_new = ['zipcode', 'median_price']
+
+    data.columns = cols_new
+
+    data['zipcode'] = data['zipcode'].astype(object)
+
+    st.write(portifolio)
+
+    fig = px.bar(data, x='zipcode', y='median_price')
+
+    st.plotly_chart(fig, use_container_width=True)
+
+    return None
 
 # 3.0 Loading data(*)
 portifolio = loading_data( 'dataset/kc_house_data.csv' )
@@ -172,6 +194,9 @@ validating_first_hypo( portifolio )
 ## 5.0.1 validating first hypothesis
 
 validating_first_hypo( portifolio )
+
+validating_second_hypo( portifolio )
+
 
 
 # 6.0 Putting on Heroku
