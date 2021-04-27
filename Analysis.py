@@ -189,6 +189,25 @@ def validating_fourth_hypo( data ):
 
     return None
 
+def validating_fifth_hypo( data ):
+    st.header('Are non-renovated properties 20% cheaper?')
+    st.write('\n')
+
+    non_renovated_properties = data[ data['yr_renovated'] == 0 ]['price'].median()
+    renovated_properties = data[ data['yr_renovated'] !=0 ]['price'].median()
+
+    data1 = {'renovation': ['non_renovated', 'renovated'], 'price_of_median': [non_renovated_properties, renovated_properties]}
+
+    df = pd.DataFrame(data1).reset_index()
+
+    st.write(df)
+
+    fig = px.bar(df, x='renovation', y='price_of_median')
+
+    st.plotly_chart(fig, use_container_width=True)
+
+
+    return None
 
 # 3.0 Loading data(*)
 portifolio = loading_data( 'dataset/kc_house_data.csv' )
