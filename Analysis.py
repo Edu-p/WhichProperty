@@ -168,6 +168,28 @@ def validating_third_hypo( data ):
     return None
 
 
+def validating_fourth_hypo( data ):
+    st.header('Are older properties cheaper?')
+    st.subheader('(older properties is year_built < 1950)')
+    st.write('\n')
+
+    old_properties = data[ data['yr_built'] <= 1950 ]['price'].median()
+    new_properties = data[ data['yr_built'] > 1950 ]['price'].median()
+
+    data1 = {'type': ['old_properties', 'new_properties'], 'price_of_median': [old_properties, new_properties]}
+
+    df = pd.DataFrame(data1).reset_index()
+
+    st.write(df)
+
+    fig = px.bar(df, x='type', y='price_of_median')
+
+    st.plotly_chart(fig, use_container_width=True)
+
+
+    return None
+
+
 # 3.0 Loading data(*)
 portifolio = loading_data( 'dataset/kc_house_data.csv' )
 
