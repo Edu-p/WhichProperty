@@ -117,9 +117,9 @@ def validating_first_hypo( data ):
 
     st.header('Does the season that you sell influence price?')
 
-    data = data[['season', 'price']].groupby('season').mean().reset_index()
+    df = data[['season', 'price']].groupby('season').median().reset_index()
 
-    fig = px.bar(portifolio, x='season', y='price')
+    fig = px.bar(df, x='price', y='season')
 
     st.plotly_chart(fig, use_container_width=True)
 
@@ -147,6 +147,7 @@ def validating_second_hypo( data ):
     return None
 
 def validating_third_hypo( data ):
+
     st.header('If the condition of the property is bad, is it more than 30% devalued, on average?')
     st.subheader('(if you compare with properties that were in good condition)')
     st.write('\n')
@@ -154,26 +155,24 @@ def validating_third_hypo( data ):
     median_good = int(data[ (data['condition'] == 4) | (data['condition'] == 3) | (data['condition'] == 5) ]['price'].median() )
     median_bad = int(data[ (data['condition'] == 1) | (data['condition'] == 2) ]['price'].median() )
 
-    data1 = { 'median_good' : [median_good], 'median_bad' : [median_bad] }
+    data1 = { 'type' : ['median_bad','median_good'], 'price_of_median' : [median_bad, median_good] }
 
-    df = pd.DataFrame( data1, index=['median'] )
+    df = pd.DataFrame( data1 ).reset_index()
 
     st.write( df )
 
-    df = px.data.tips()
-
-    fig = px.pie(df, values='tip', names='median_good')
+    fig = px.bar(df, x='type' , y='price_of_median')
 
     st.plotly_chart(fig, use_container_width=True)
 
     return None
+
 
 # 3.0 Loading data(*)
 portifolio = loading_data( 'dataset/kc_house_data.csv' )
 
 ### 3.0.1 filtering data
 portifolio = filtering_data( portifolio )
-
 
 # 4.0 Data Description
 
@@ -201,7 +200,6 @@ portifolio = creating_features( portifolio )
 
 # 5.0 Data Exp
 
-
 ## 5.0.1 validating first hypothesis
 validating_first_hypo( portifolio )
 
@@ -211,11 +209,17 @@ validating_second_hypo( portifolio )
 ## 5.0.3 validating third hypothesis
 validating_third_hypo( portifolio )
 
+## 5.0.4 validating fourth hypothesis
 
 
+## 5.0.5 validating fifth hypothesis
 
 
+st.write( portifolio.head(40) )
 
-# 6.0 Putting on Heroku
+# 6.0 Conclusions
+
+
+# 7.0 Putting on Heroku
 
 
