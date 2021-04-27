@@ -1,4 +1,3 @@
-
 # 1.0 Imports
 
 import pandas as pd
@@ -9,54 +8,55 @@ from IPython.display import Image
 import streamlit as st
 import plotly.express as px
 
+
 # 2.0 Helper functions
 
-def loading_data( path ):
-
+def loading_data(path):
     data = pd.read_csv(path)
 
     return data
 
-def filtering_data( data ):
 
+def filtering_data(data):
     data = data[['id', 'price', 'zipcode', 'date', 'condition', 'yr_built', 'yr_renovated', 'bedrooms']]
 
     return data
 
-def show_data_dimensions( data ):
 
+def show_data_dimensions(data):
     print('number of Rows: {}'.format(portifolio.shape[0]))
     print('number of Rows: {}'.format(portifolio.shape[1]))
     print('----------------------------\n')
 
     return None
 
-def show_data_types( data ):
 
+def show_data_types(data):
     data['date'] = pd.to_datetime(data['date'])
     print(portifolio.dtypes)
 
     return data
 
-def checkNa( data ):
+
+def checkNa(data):
     print(portifolio.isna().sum())
     print('----------------------------\n')
     return None
 
-def removing_outliers( data ):
 
+def removing_outliers(data):
     data = data.loc[(data['price'] < 2000000) & (data['bedrooms'] < 5)]
 
     return data
 
-def change_types( data ):
 
+def change_types(data):
     data['date'] = pd.to_datetime(data['date'])
 
     return data
 
-def descriptive_statistical( data ):
 
+def descriptive_statistical(data):
     pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
     ### 4.0.7.1 Numerical Attributes
@@ -85,7 +85,8 @@ def descriptive_statistical( data ):
 
     return None
 
-def creating_features( data ):
+
+def creating_features(data):
     ### 4.0.8.2 creating columns
 
     data['profit'] = 0
@@ -112,7 +113,8 @@ def creating_features( data ):
 
     return data
 
-def validating_first_hypo( data ):
+
+def validating_first_hypo(data):
     st.title('Validating hypothesis')
 
     st.header('Does the season that you sell influence price?')
@@ -125,7 +127,8 @@ def validating_first_hypo( data ):
 
     return None
 
-def validating_second_hypo( data ):
+
+def validating_second_hypo(data):
     st.header('The valuation of the zipcode influences the price of the property?')
 
     st.write('\n')
@@ -146,35 +149,36 @@ def validating_second_hypo( data ):
 
     return None
 
-def validating_third_hypo( data ):
 
+def validating_third_hypo(data):
     st.header('If the condition of the property is bad, is it more than 30% devalued, on average?')
     st.subheader('(if you compare with properties that were in good condition)')
     st.write('\n')
 
-    median_good = int(data[ (data['condition'] == 4) | (data['condition'] == 3) | (data['condition'] == 5) ]['price'].median() )
-    median_bad = int(data[ (data['condition'] == 1) | (data['condition'] == 2) ]['price'].median() )
+    median_good = int(
+        data[(data['condition'] == 4) | (data['condition'] == 3) | (data['condition'] == 5)]['price'].median())
+    median_bad = int(data[(data['condition'] == 1) | (data['condition'] == 2)]['price'].median())
 
-    data1 = { 'type' : ['median_bad','median_good'], 'price_of_median' : [median_bad, median_good] }
+    data1 = {'type': ['median_bad', 'median_good'], 'price_of_median': [median_bad, median_good]}
 
-    df = pd.DataFrame( data1 ).reset_index()
+    df = pd.DataFrame(data1).reset_index()
 
-    st.write( df )
+    st.write(df)
 
-    fig = px.bar(df, x='type' , y='price_of_median')
+    fig = px.bar(df, x='type', y='price_of_median')
 
     st.plotly_chart(fig, use_container_width=True)
 
     return None
 
 
-def validating_fourth_hypo( data ):
+def validating_fourth_hypo(data):
     st.header('Are older properties cheaper?')
     st.subheader('(older properties is year_built < 1950)')
     st.write('\n')
 
-    old_properties = data[ data['yr_built'] <= 1950 ]['price'].median()
-    new_properties = data[ data['yr_built'] > 1950 ]['price'].median()
+    old_properties = data[data['yr_built'] <= 1950]['price'].median()
+    new_properties = data[data['yr_built'] > 1950]['price'].median()
 
     data1 = {'type': ['old_properties', 'new_properties'], 'price_of_median': [old_properties, new_properties]}
 
@@ -186,17 +190,18 @@ def validating_fourth_hypo( data ):
 
     st.plotly_chart(fig, use_container_width=True)
 
-
     return None
 
-def validating_fifth_hypo( data ):
+
+def validating_fifth_hypo(data):
     st.header('Are non-renovated properties 20% cheaper?')
     st.write('\n')
 
-    non_renovated_properties = data[ data['yr_renovated'] == 0 ]['price'].median()
-    renovated_properties = data[ data['yr_renovated'] !=0 ]['price'].median()
+    non_renovated_properties = data[data['yr_renovated'] == 0]['price'].median()
+    renovated_properties = data[data['yr_renovated'] != 0]['price'].median()
 
-    data1 = {'renovation': ['non_renovated', 'renovated'], 'price_of_median': [non_renovated_properties, renovated_properties]}
+    data1 = {'renovation': ['non_renovated', 'renovated'],
+             'price_of_median': [non_renovated_properties, renovated_properties]}
 
     df = pd.DataFrame(data1).reset_index()
 
@@ -205,7 +210,6 @@ def validating_fifth_hypo( data ):
     fig = px.bar(df, x='renovation', y='price_of_median')
 
     st.plotly_chart(fig, use_container_width=True)
-
 
     return None
 
@@ -260,11 +264,19 @@ def building_conclusions(data):
     return data
 
 
+def print_final_dataset(data):
+    st.header('Dataset with recomendations:')
+
+    st.write(data.sample(50))
+
+    return None
+
+
 # 3.0 Loading data(*)
-portifolio = loading_data( 'dataset/kc_house_data.csv' )
+portifolio = loading_data('dataset/kc_house_data.csv')
 
 ### 3.0.1 filtering data
-portifolio = filtering_data( portifolio )
+portifolio = filtering_data(portifolio)
 
 # 4.0 Data Description
 
@@ -272,45 +284,49 @@ portifolio = filtering_data( portifolio )
 show_data_dimensions(portifolio)
 
 ## 4.0.2 Data Types
-portifolio = show_data_types( portifolio )
+portifolio = show_data_types(portifolio)
 
 ## 4.0.3 Check NA
 checkNa(portifolio)
 
 ## 4.0.5 Removing Outliers
-portifolio = removing_outliers( portifolio )
-
+portifolio = removing_outliers(portifolio)
 
 ## 4.0.6 Change types
-portifolio = change_types( portifolio )
+portifolio = change_types(portifolio)
 
 ## 4.0.7 Descriptive Statistical
 descriptive_statistical(portifolio)
 
 ## 4.0.8 Feature engeneering
-portifolio = creating_features( portifolio )
+portifolio = creating_features(portifolio)
 
 # 5.0 Data Exp
 
 ## 5.0.1 validating first hypothesis
-validating_first_hypo( portifolio )
+validating_first_hypo(portifolio)
 
 ## 5.0.2 validating second hypothesis
-validating_second_hypo( portifolio )
+validating_second_hypo(portifolio)
 
 ## 5.0.3 validating third hypothesis
-validating_third_hypo( portifolio )
+validating_third_hypo(portifolio)
 
 ## 5.0.4 validating fourth hypothesis
-
+validating_fourth_hypo(portifolio)
 
 ## 5.0.5 validating fifth hypothesis
+validating_fifth_hypo(portifolio)
 
-
-st.write( portifolio.head(40) )
+st.write(portifolio.head(40))
 
 # 6.0 Conclusions
 
+st.header('Are older properties cheaper?')
+
+portifolio = building_conclusions(portifolio)
+
+print_final_dataset(portifolio)
 
 # 7.0 Putting on Heroku
 
