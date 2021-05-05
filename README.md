@@ -5,30 +5,21 @@
 
 House Rocket, located in seattle, is a company specialized in buying and selling real estate, with its profit on it
 
-Currently, real estate choices are made manually by a team of company specialists, however, due to the complexity of assessing the profit potential of a property, the company's value is falling and may cuminize in a company bankruptcy, if nothing is done
+Currently, real estate choices are made manually by a team of company specialists, however, due to the complexity and cost of evaluating the profit potential of a property with so many options in the portfolio, the company has an extremely unpredictable cash flow, driving investors away. 
 
-The price of the diagnosis, paid by the client, varies according to the precision achieved by the team of specialists.
+# 2. Business Assumptions.
 
-| Exam Accuracy | Price          | Rules                                    | Example                         |
-|:--------------|:---------------|:-----------------------------------------|:--------------------------------|
-| Above 50%     | min \$500\.00  | \+\$500 for each additional 5% precision | Precision = 55% \-> \$1,000\.00 |
-| Up to 50%     | $0\.00         | N/A                                      | N/A                             |
+The assumptions about the business problem is as follows:
 
-Thus, we see that **different values in the exam precision**, given by the team of specialists, make the company either have a profitable operation, revenue greater than the cost, or an operation with a loss, revenue less than the cost. This instability of the diagnosis makes the company to have an **unpredictable cashflow**.
+- The National Realtors Association forecasts that sales prices of existing homes will average $ 218,500 this year, 5% higher than the $ 208,000 of 2014, and that new and existing home sales might reach 5.83 million in 2015, higher than in any year since the recession.
+- The national Case-Schiller index tracks repeat-sales home prices across the country. It reflected national price growth of 1.3% in 2012, 9.6% in 2013 and 6.6% in 2014.
+
+![_2015_04_housing_market_2_case_schiller](https://user-images.githubusercontent.com/72039442/117127180-2430ff80-ad72-11eb-8f31-7acb474cc8f2.png)
+
+- [Reference](https://smartasset.com/mortgage/housing-market-2015#:~:text=2015%20Forecast&text=The%20National%20Realtors%20Association%20forecasts,any%20year%20since%20the%20recession. )
 
 
-
-2. Premissas do negocio:
-    - Metricas que foram alteradas para Acontecer o projeto( casas ficam cheias de neve no inverno )
-    - Considerei que é inverno no intervalo de setembro ate março 
-    - Consideri que é verao no intervalo de março ate setembro
-    - 
-    - O que considerei como Outliers no meu projeto( valores acima de ... sao considerados erros humanos )
-    - Considerei outlires casas acima de 2000000 de dolares
-    - Possiveis Casas com mais de 5 quartos
-    - 
-    - O que levo de consideraçao para iniciar o projeto, o escopo
-    - 
+   
 3. Planejamento da soluçao:
     - Como acho que vou resolver o problema no 
 4. Os 5 principais insights de negocio:
@@ -40,4 +31,6 @@ Thus, we see that **different values in the exam precision**, given by the team 
 7. Proximos passos;
     - O que pode ser melhorado no meu projeto?
     - Que coisas o implementariam?
+
+
 
