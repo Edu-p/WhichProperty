@@ -20,8 +20,38 @@ The assumptions about the business problem is as follows:
 
 
    
-3. Planejamento da soluçao:
-    - Como acho que vou resolver o problema no 
+# 3. Solution Strategy
+
+My strategy to solve this challenge was:
+
+**Step 01. Data Description:** My goal is to use statistics metrics to identify data outside the scope of business.
+
+**Step 02. Feature Engineering:** Derive new attributes based on the original variables to better describe the phenomenon that will be modeled.
+
+**Step 03. Data Filtering:** Filter rows and select columns that do not contain information for modeling or that do not match the scope of the business.
+
+**Step 04. Exploratory Data Analysis:** Explore the data to find insights and better understand the impact of variables on model learning.
+
+**Step 05. Convert Analysis to Business Values:** Convert the analysis that i´ve do into a business result.
+
+**Step 6. Deploy Modelo to Production:** Publish the model in a cloud environment so that other people or services can use the results to improve the business decision.
+
+# 4. Top 3 Data Insights
+
+**Hypothesis 01:** Does the season that you sell influence price?
+
+**True.** As observed, on average, properties sold in the summer are 22,000 more expensive
+
+**Hypothesis 02:**  The valuation of the zipcode influences the price of the property?
+
+**True.** As observed, the cheapest zip code is, on average, 230k the price of the property, while the most expensive is 1.4m
+
+**Hypothesis 03:** If the condition of the property is bad, is it more than 30% devalued, in the mean?
+
+**True.** As observed, if the condition of the house is "bad" it is, on average, ≅40% cheaper than the condition of good condition
+
+
+
 4. Os 5 principais insights de negocio:
     - Insights comprovados e acionaveis a aprtir da analise dos dados
 5. Resultados financeiros para o negocio:
