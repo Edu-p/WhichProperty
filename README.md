@@ -30,7 +30,7 @@ My strategy to solve this challenge was:
 
 **Step 03. Data Filtering:** Filter rows and select columns that do not contain information for modeling or that do not match the scope of the business.
 
-**Step 04. Exploratory Data Analysis:** Explore the data to find insights and better understand the impact of variables on model learning.
+**Step 04. Exploratory Data Analysis:** Explore the data to find insights and better understand the business
 
 **Step 05. Convert Analysis to Business Values:** Convert the analysis that i´ve do into a business result.
 
