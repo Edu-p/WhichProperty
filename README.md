@@ -51,6 +51,41 @@ My strategy to solve this challenge was:
 **True.** As observed, if the condition of the house is "bad" it is, on average, ≅40% cheaper than the condition of good condition
 
 
+# 5. Business Results
+
+Let's recap how many properties the House Rocket business team must analyze in this data set provided and how long they would take a decision, on average 
+   - let's consider that a professional can say in 1,5 min if that property can pass for a more refined analysis
+
+|Before-After   | Dataset size  | Analysis time  |        
+|:--------------|:--------------|:---------------|
+|Before         | 21613         | 22 days        |           
+|After          | 5629          | 6 days         |           
+
+
+Our full original dataset contains records for 21,000 properties. Suppose we are going to analyze all of them and decide which ones to buy, our result achieved a profit of 23% in relation to the properties purchased, which is higher than the 10% to 15% that is usually obtained in a property sale. Thus, translating to commercial numbers.
+
+|                        | Profit             | Worst             |
+|:-----------------------|------------------:|------------------:|
+| WhichProperty          | \$186,164,981.89  | \$171,777,607.99  |
+| Today (AS IS)          | \$105,000,000.00  | \$35,000,000.00   |
+
+
+This means that having a portfolio of 70k patients that would go through the clinical procedure to check whether they have or not a cardiovascular disease, in the **worst business scenario** the portfolio would generate a profit of **\$171.7 million** and in the **best scenario \$186.2 million**, in contrast to today's procedure that at its best has an accuracy of 65% and would generate a total of \$105 million, that's **a difference of \$81.2 million!**
+
+
+# 8. Conclusions
+
+# 9. Lessons Learned
+
+# 10. Next Steps to Improve
+
+**1.** **Develop an app** that intakes a portfolio of patients and assigns for each patient its respective probability of presenting a cardiovascular disease.
+
+**2.** **Run a Design Discovery** to uncover facts that could be missing in our analysis in order to enrich the data that we have and improve the model performance.
+
+**3.** Build a **model retraining pipeline**.
+
+
 
 4. Os 5 principais insights de negocio:
     - Insights comprovados e acionaveis a aprtir da analise dos dados
