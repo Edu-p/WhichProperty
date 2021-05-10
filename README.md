@@ -1,5 +1,9 @@
 # WhichProperty
-# PASSAR TUDO PRA INGLES
+
+# Increasing House Rocket's profit 
+
+![image](https://user-images.githubusercontent.com/72039442/117654827-ac494780-b16c-11eb-959a-993098baf89f.png)
+
 
 # 1. Business Problem.
 
@@ -62,7 +66,7 @@ Let's recap how many properties the House Rocket business team must analyze in t
 |After          | 5629          | 6 days         |           
 
 
-Our full original dataset contains records for 21,000 properties. Suppose we are going to analyze all of them and decide which ones to buy, our result achieved a profit of 23% in relation to the properties purchased, which is higher than the 10% to 15% that is usually obtained in a property sale. Thus, translating to commercial numbers.
+Our full original dataset contains records for **21k** properties. Suppose we are going to analyze all of them and decide which ones to buy, our result achieved a profit of 23% in relation to the properties purchased, which is higher than ≅15% that is usually obtained in a property sale. Thus, translating to commercial numbers. ( [Reference](https://smallbusiness.chron.com/reasonable-profit-margin-17989.html) ) 
 
 |                        | Profit            |Percentage         |
 |:-----------------------|------------------:|------------------:|
@@ -72,12 +76,10 @@ Our full original dataset contains records for 21,000 properties. Suppose we are
 This means that having a portfolio of **21k** properties that would go through the selection of the model to check whether or not to buy it, in the worst expected scenario the portfolio would generate a profit of $ 627 million, much faster than it is today, having scope to analyze more possible purchases of **House Rocket** 
 
 
-# 8. Conclusions
+# 6. Next Steps to Improve
 
-# 9. Lessons Learned
-
-# 10. Next Steps to Improve
-
+1. Put **more filters** in the analysis of properties 
+2. **Implement ML models** to improve the analysis
 
 
 
