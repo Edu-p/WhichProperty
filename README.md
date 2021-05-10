@@ -64,13 +64,12 @@ Let's recap how many properties the House Rocket business team must analyze in t
 
 Our full original dataset contains records for 21,000 properties. Suppose we are going to analyze all of them and decide which ones to buy, our result achieved a profit of 23% in relation to the properties purchased, which is higher than the 10% to 15% that is usually obtained in a property sale. Thus, translating to commercial numbers.
 
-|                        | Profit             | Worst             |
+|                        | Profit            |Percentage         |
 |:-----------------------|------------------:|------------------:|
-| WhichProperty          | \$186,164,981.89  | \$171,777,607.99  |
-| Today (AS IS)          | \$105,000,000.00  | \$35,000,000.00   |
+| WhichProperty          | \$627.113.399  | 22,9%             |
 
 
-This means that having a portfolio of 70k patients that would go through the clinical procedure to check whether they have or not a cardiovascular disease, in the **worst business scenario** the portfolio would generate a profit of **\$171.7 million** and in the **best scenario \$186.2 million**, in contrast to today's procedure that at its best has an accuracy of 65% and would generate a total of \$105 million, that's **a difference of \$81.2 million!**
+This means that having a portfolio of **21k** properties that would go through the selection of the model to check whether or not to buy it, in the worst expected scenario the portfolio would generate a profit of $ 627 million, much faster than it is today, having scope to analyze more possible purchases of **House Rocket** 
 
 
 # 8. Conclusions
@@ -79,23 +78,6 @@ This means that having a portfolio of 70k patients that would go through the cli
 
 # 10. Next Steps to Improve
 
-**1.** **Develop an app** that intakes a portfolio of patients and assigns for each patient its respective probability of presenting a cardiovascular disease.
-
-**2.** **Run a Design Discovery** to uncover facts that could be missing in our analysis in order to enrich the data that we have and improve the model performance.
-
-**3.** Build a **model retraining pipeline**.
-
-
-
-4. Os 5 principais insights de negocio:
-    - Insights comprovados e acionaveis a aprtir da analise dos dados
-5. Resultados financeiros para o negocio:
-    - O lucro mais o menos que a empresa vai ter se cumprir com nossa analise e aplica-la
-6. Conclusao:
-    - Seu objetivo inicial foi alcançado?
-7. Proximos passos;
-    - O que pode ser melhorado no meu projeto?
-    - Que coisas o implementariam?
 
 
 
