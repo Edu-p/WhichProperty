@@ -1,5 +1,5 @@
 # 1.0 Imports
-
+import folium as folium
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -8,17 +8,20 @@ from IPython.display import Image
 import streamlit as st
 import plotly.express as px
 
+from streamlit_folium import folium_static
+from folium.plugins import MarkerCluster
 
 # 2.0 Helper functions
 
+
 def loading_data(path):
     data = pd.read_csv(path)
-
+    print( data.shape )
     return data
 
 
 def filtering_data(data):
-    data = data[['id', 'price', 'zipcode', 'date', 'condition', 'yr_built', 'yr_renovated', 'bedrooms']]
+    data = data[['id', 'price', 'zipcode', 'date', 'condition', 'yr_built', 'yr_renovated', 'bedrooms','lat','long']]
 
     return data
 
@@ -268,12 +271,19 @@ def building_conclusions(data):
 
     print(data[['status', 'price', 'zipcode', 'season', 'sell_price', 'profit']].head(50))
 
-    print('Total Profit: {}'.format(data['profit'][data['profit'] > 0].sum()))
+
+    print('rows to buy: {}'.format(data[data['sell_price'] > 0].shape ))
+
 
     data.loc[(data['profit'] <= 0), 'profit'] = 0
 
-
+    print('Total Profit: {}'.format(data['profit'][data['profit'] > 0].sum()))
     return data
+
+def printing_map( data ):
+
+    return None
+
 
 
 def print_final_dataset(data):
@@ -332,11 +342,30 @@ validating_fifth_hypo(portifolio)
 
 st.write(portifolio.head(40))
 
+
+st.title('Region Overview')
+
+
+df = portifolio.sample(100)  # pegar uma amostra
+
+# Base Map - Folium( map lib )
+density_map = folium.Map(location=[portifolio['lat'].mean(), portifolio['long'].mean()])
+
+maker_cluster = MarkerCluster().add_to(density_map)
+for name, row in df.iterrows():# deixar meu dataframe interativo, row cada linha do dataset
+    folium.Marker([row['lat'], row['long']],
+                    popup='Price R$ : {0}'.format(row['price'])).add_to(maker_cluster)
+
+folium_static(density_map)
+
+
 # 6.0 Conclusions
 
 portifolio = building_conclusions(portifolio)
 
 print_final_dataset(portifolio)
+
+
 
 # 7.0 Putting on Heroku
 
