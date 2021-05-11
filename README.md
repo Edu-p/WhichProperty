@@ -37,6 +37,17 @@ My strategy to solve this challenge was:
 **Step 04. Exploratory Data Analysis:** Explore the data to find insights and better understand the business
 
 **Step 05. Convert Analysis to Business Values:** Convert the analysis that i´ve do into a business result.
+   - Group data by region (zipcode)
+   - Within each region, I will find the median real estate price
+   - I will suggest that the properties that are below the median price of each region and
+      that are in good condition are purchased
+   - Group the properties by region (zipcode) and by seasonality (Summer, winter)
+   - Set sales price:
+      - If the purchase price is higher than the region's median + seasonality:
+         - Sale price will be equal to the purchase price + 10%
+
+      - If the purchase price is less than the region's median + seasonality:
+         - Sale price will be equal to the purchase price + 30%
 
 **Step 6. Deploy Modelo to Production:** Publish the model in a cloud environment so that other people or services can use the results to improve the business decision.
 
@@ -80,6 +91,5 @@ This means that having a portfolio of **21k** properties that would go through t
 
 1. Put **more filters** in the analysis of properties 
 2. **Implement ML models** to improve the analysis
-
 
 
