@@ -11,39 +11,40 @@ import plotly.express as px
 from streamlit_folium import folium_static
 from folium.plugins import MarkerCluster
 
+
 # 2.0 Helper functions
 
 
 def loading_data(path):
     data = pd.read_csv(path)
-    print( data.shape )
+    # print(data.shape)
     return data
 
 
 def filtering_data(data):
-    data = data[['id', 'price', 'zipcode', 'date', 'condition', 'yr_built', 'yr_renovated', 'bedrooms','lat','long']]
+    data = data[['id', 'price', 'zipcode', 'date', 'condition', 'yr_built', 'yr_renovated', 'bedrooms', 'lat', 'long']]
 
     return data
 
 
 def show_data_dimensions(data):
-    print('number of Rows: {}'.format(portifolio.shape[0]))
-    print('number of Rows: {}'.format(portifolio.shape[1]))
-    print('----------------------------\n')
+    # print('number of Rows: {}'.format(portifolio.shape[0]))
+    # print('number of Rows: {}'.format(portifolio.shape[1]))
+    # print('----------------------------\n')
 
     return None
 
 
 def show_data_types(data):
-    data['date'] = pd.to_datetime(data['date'])
-    print(portifolio.dtypes)
+    # data['date'] = pd.to_datetime(data['date'])
+    # print(portifolio.dtypes)
 
     return data
 
 
 def checkNa(data):
-    print(portifolio.isna().sum())
-    print('----------------------------\n')
+    # print(portifolio.isna().sum())
+    # print('----------------------------\n')
     return None
 
 
@@ -83,8 +84,8 @@ def descriptive_statistical(data):
 
     dfDesc.columns = ['attributes', 'min', 'max', 'range', 'mean', 'median', 'std', 'skew', 'kurtosis']
 
-    print(dfDesc)
-    print('----------------------------\n')
+    # print(dfDesc)
+    # print('----------------------------\n')
 
     return None
 
@@ -223,19 +224,19 @@ def building_conclusions(data):
     medianbyZipCode = data[['price', 'zipcode']].groupby('zipcode').median().reset_index()
 
     # comparing properties by median of zipcode
-    print('--------1')
-    print( data.columns )
-    print('--------1')
+    # print('--------1')
+    # print(data.columns)
+    # print('--------1')
     # print(portWithFilter.columns)
 
     for i in range(len(data)):
         for j in range(len(medianbyZipCode)):
             if (data.iloc[i, 2] == medianbyZipCode.loc[j, 'zipcode']):
-                data.iloc[i, 11] = medianbyZipCode.loc[j, 'price']
+                data.iloc[i, 13] = medianbyZipCode.loc[j, 'price']
                 if (data.iloc[i, 1] > medianbyZipCode.loc[j, 'price']):
-                    data.iloc[i, 9] = 'not buy'
+                    data.iloc[i, 11] = 'not buy'
                 else:
-                    data.iloc[i, 9] = 'buy'
+                    data.iloc[i, 11] = 'buy'
                 continue
 
     # print(portWithFilter.head(15))
@@ -245,45 +246,41 @@ def building_conclusions(data):
     data.loc[(data['date'].dt.month >= 3) & (data['date'].dt.month < 9), 'season'] = 'Summer'
     data.loc[(data['date'].dt.month >= 9) | (data['date'].dt.month < 3), 'season'] = 'Winter'
 
-    data.loc[ (data['status'] == 'buy') & (data['season'] == 'Winter'), 'status' ] = 'not buy'
+    data.loc[(data['status'] == 'buy') & (data['season'] == 'Winter'), 'status'] = 'not buy'
 
     medianbyZipCodeandSeason = data[['price', 'zipcode', 'season']].groupby(
         ['zipcode', 'season']).median().reset_index()
 
-    print('--------1')
-    print(data.columns)
-    print('--------1')
+    # print('--------1')
+    # print(data.columns)
+    # print('--------1')
 
     for i in range(len(data)):
-        if data.iloc[i, 9] == 'buy':
+        if data.iloc[i, 11] == 'buy':
             for j in range(len(medianbyZipCodeandSeason)):
                 if (data.iloc[i, 2] == medianbyZipCodeandSeason.loc[j, 'zipcode']) & (
-                        data.iloc[i, 12] == 'Summer'):
-                    if (data.iloc[i, 1] >= data.iloc[i,11]):
-                        data.iloc[i, 10] = data.iloc[i, 1] * 1.1
+                        data.iloc[i, 14] == 'Summer'):
+                    if (data.iloc[i, 1] >= data.iloc[i, 13]):
+                        data.iloc[i, 12] = (data.iloc[i, 1]) * (1.1)
                         break
                     else:
-                        data.iloc[i, 10] = data.iloc[i, 1] * 1.3
+                        data.iloc[i, 12] = (data.iloc[i, 1]) * (1.3)
                         break
 
-        data.iloc[i, 8] = data.iloc[i, 10] - data.iloc[i, 1]
+        data.iloc[i, 10] = (data.iloc[i, 12]) - (data.iloc[i, 1])
 
-
-    print(data[['status', 'price', 'zipcode', 'season', 'sell_price', 'profit']].head(50))
-
-
-    print('rows to buy: {}'.format(data[data['sell_price'] > 0].shape ))
-
+    # print(data[['status', 'price', 'zipcode', 'season', 'sell_price', 'profit']].head(50))
+    #
+    # print('rows to buy: {}'.format(data[data['sell_price'] > 0].shape))
 
     data.loc[(data['profit'] <= 0), 'profit'] = 0
 
-    print('Total Profit: {}'.format(data['profit'][data['profit'] > 0].sum()))
+    # print('Total Profit: {}'.format(data['profit'][data['profit'] > 0].sum()))
     return data
 
-def printing_map( data ):
 
+def printing_map(data):
     return None
-
 
 
 def print_final_dataset(data):
@@ -342,9 +339,7 @@ validating_fifth_hypo(portifolio)
 
 st.write(portifolio.head(40))
 
-
 st.title('Region Overview')
-
 
 df = portifolio.sample(100)  # pegar uma amostra
 
@@ -352,21 +347,18 @@ df = portifolio.sample(100)  # pegar uma amostra
 density_map = folium.Map(location=[portifolio['lat'].mean(), portifolio['long'].mean()])
 
 maker_cluster = MarkerCluster().add_to(density_map)
-for name, row in df.iterrows():# deixar meu dataframe interativo, row cada linha do dataset
+for name, row in df.iterrows():  # deixar meu dataframe interativo, row cada linha do dataset
     folium.Marker([row['lat'], row['long']],
-                    popup='Price R$ : {0}'.format(row['price'])).add_to(maker_cluster)
+                  popup='Price R$ : {0}'.format(row['price'])).add_to(maker_cluster)
 
 folium_static(density_map)
-
 
 # 6.0 Conclusions
 
 portifolio = building_conclusions(portifolio)
 
+printing_map(portifolio)
+
 print_final_dataset(portifolio)
 
-
-
 # 7.0 Putting on Heroku
-
-
