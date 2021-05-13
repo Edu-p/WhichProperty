@@ -7,7 +7,7 @@
 
 # 1. Business Problem.
 
-House Rocket, located in seattle, is a company specialized in buying and selling real estate, with its profit on it
+House Rocket, located in seattle, is a company that specializes in buying and selling real estate, making its profit in this process
 
 Currently, real estate choices are made manually by a team of company specialists, however, due to the complexity and cost of evaluating the profit potential of a property with so many options in the portfolio, the company has an extremely unpredictable cash flow, driving investors away. 
 
