@@ -1,4 +1,4 @@
-# WhichProperty
+# which-property
 
 # Increasing House Rocket's profit 
 
